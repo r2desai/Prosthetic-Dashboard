@@ -26,11 +26,7 @@ export interface SavedTest {
 
 const STORAGE_KEY = "prosthetic-dashboard:saved-tests";
 
-/**
- * Local storage for now, per the blueprint's assumption — no backend yet.
- * This is the only place that knows the storage key, so swapping to a
- * real server later only means changing this file.
- */
+
 export function loadSavedTests(): SavedTest[] {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -46,8 +42,7 @@ function persist(tests: SavedTest[]): void {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(tests));
   } catch {
-    // storage full or unavailable (e.g. private browsing) — the test still
-    // exists in memory for this session, it just won't survive a reload
+    
   }
 }
 

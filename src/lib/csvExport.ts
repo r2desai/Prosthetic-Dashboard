@@ -1,12 +1,6 @@
 import type { SavedTest } from "./savedTests";
 
-/**
- * Builds a CSV with one row per sample index and one column per channel
- * (FSR, battery, then current/position/pwm per actuator tested), and
- * triggers a browser download. Sample index stands in for time until we
- * know the real device's actual sample rate — see the dashboard's "Known
- * unknowns" notes.
- */
+
 export function exportTestToCsv(test: SavedTest): void {
   const actuatorKeys = test.actuatorsTested;
   const rowCount = Math.max(

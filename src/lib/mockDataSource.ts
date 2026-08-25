@@ -1,10 +1,5 @@
 import type { ConnectionStatus, DataSource, DataSourceOptions } from "./dataSource";
 
-/**
- * Placeholder actuator list — thumb, four-finger group, and two wrist
- * motors, per the hardware setup. IDs are illustrative; swap them for
- * whatever the firmware actually calls each channel once that's known.
- */
 export const MOCK_ACTUATORS = [
   { id: "thumb", label: "Thumb" },
   { id: "fingers", label: "Fingers" },
@@ -17,14 +12,7 @@ export type MockActuatorId = (typeof MOCK_ACTUATORS)[number]["id"];
 const TICK_MS = 150;
 const FAULT_INTERVAL_TICKS = Math.round(15000 / TICK_MS); // roughly one simulated fault every 15s
 
-/**
- * Generates fake telemetry lines on the same cadence and JSON shape a
- * real device would (see telemetry.ts), so charts, the status panel,
- * and the rest of the UI can be built and tested with no hardware
- * attached. Implements the same DataSource interface as SerialConnection,
- * so switching from simulated to real data is a one-line change in
- * whichever component decides which source to use.
- */
+
 export class MockDataSource implements DataSource {
   private status: ConnectionStatus = "disconnected";
   private intervalId: ReturnType<typeof setInterval> | null = null;
@@ -45,7 +33,6 @@ export class MockDataSource implements DataSource {
     this.options.onStatusChange?.(status);
   }
 
-  /** No device picker needed — just a short simulated delay, like a real handshake. */
   async connect(): Promise<void> {
     this.setStatus("connecting");
     await new Promise((resolve) => setTimeout(resolve, 400));
@@ -64,7 +51,6 @@ export class MockDataSource implements DataSource {
   private emitFrame(): void {
     this.tick += 1;
 
-    // battery drains very slowly, with a little noise on top
     this.batteryVoltage = Math.max(
       6.4,
       this.batteryVoltage - 0.00015 + (Math.random() - 0.5) * 0.002

@@ -121,9 +121,6 @@ function App() {
       pushEvent("fault", frame.fault);
     }
 
-    // Recording is tracked through a ref (mutated directly, not via setState)
-    // so this closure — fixed at connect() time — always sees the current
-    // recording rather than a stale snapshot of component state.
     const recording = recordingRef.current;
     if (recording?.active) {
       if (typeof frame.fsr === "number") recording.fsr.push(frame.fsr);
@@ -155,7 +152,7 @@ function App() {
     try {
       await source.connect();
     } catch {
-      // status/errorMessage already updated via the callbacks passed to the source
+      
     }
   };
 
