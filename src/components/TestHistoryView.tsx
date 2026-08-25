@@ -36,7 +36,7 @@ export function TestHistoryView({ tests, onDelete }: TestHistoryViewProps) {
   const toggleSelect = (id: string) => {
     setSelectedIds((prev) => {
       if (prev.includes(id)) return prev.filter((x) => x !== id);
-      if (prev.length >= 2) return prev; // capped at two — beyond that, overlays get unreadable
+      if (prev.length >= 2) return prev; // capped at two. Beyond that, overlays get unreadable
       return [...prev, id];
     });
   };
@@ -48,7 +48,7 @@ export function TestHistoryView({ tests, onDelete }: TestHistoryViewProps) {
       <section className="card history-empty">
         <h2 className="panel-title">Test History</h2>
         <p className="panel-empty">
-          No saved tests yet. Run a test from Live Test and save it when you stop — it'll show up here.
+          No saved tests yet.
         </p>
       </section>
     );

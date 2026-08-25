@@ -12,13 +12,7 @@ interface MultiLineChartProps {
   title?: string;
 }
 
-/**
- * Overlays several series on shared axes — used to compare the same
- * channel (e.g. thumb current) across two saved tests. No gradient fill
- * here, unlike LineChart — overlapping fills between series would just
- * muddy the comparison, so this stays as clean overlaid lines with a
- * legend.
- */
+
 export function MultiLineChart({ series, min, max, height = 90, title }: MultiLineChartProps) {
   const width = 100;
   const allValues = series.flatMap((s) => s.data);

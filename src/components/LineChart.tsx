@@ -9,13 +9,6 @@ interface LineChartProps {
   id?: string;
 }
 
-/**
- * Simple SVG polyline chart over a rolling window of samples, with a
- * gradient fill beneath the line. Built by hand rather than pulling in a
- * charting library — the data volume here is small (a fixed window per
- * channel) and a custom component keeps every chart on the same design
- * tokens without fighting a library's own styling defaults.
- */
 export function LineChart({
   data,
   color = "var(--accent-blue)",

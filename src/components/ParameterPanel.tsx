@@ -95,8 +95,7 @@ export function ParameterPanel({
       </div>
 
       <p className="panel-note">
-        Apply updates local state only for now. Sending this to the real device needs the firmware's
-        command protocol, which isn't defined yet.
+        Apply updates local state only for now.
       </p>
     </section>
   );
