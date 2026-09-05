@@ -37,42 +37,18 @@ detail), parameter tuning, and a status/event panel.
   parameter diff table that highlights differing values). Comparison is
   capped at two tests, more than that gets visually unreadable fast.
 
-**How a test gets saved:** while a test is running, samples are recorded
-into a separate uncapped buffer (`recordingRef` in `App.tsx`) — not the
+**Saving a test:** while a test is running, samples are recorded
+into a separate uncapped buffer (`recordingRef` in `App.tsx`) and not the
 same rolling window the live charts use, which is capped and would lose
 early samples on anything but a short test. Stopping a test freezes that
 recording and shows a **Save Test / Discard** prompt in the test control
 bar before anything is written to history, matching the blueprint's
 stopped-state workflow.
 
-Actuator IDs (`thumb`, `fingers`, `wrist1`, `wrist2`) are still
-placeholders, defined in `mockDataSource.ts` and reused throughout the
-UI. Swap them for the real actuator names once known.
+## Using it
 
-## Running it
-
-```
-npm install
-npm run dev
-```
-
-Open the local URL in **Chrome or Edge**. Click **Use Simulated Device**
+Run it on a browser then click **Use Simulated Device**
 to see the dashboard working immediately with fake data, or
 **Connect Device** for a real serial connection (Web Serial isn't
 supported in Safari or Firefox, and only works over HTTPS or localhost).
-
-## Known unknowns to confirm
-
-- **Baud rate** and **serial data format** — still unconfirmed against
-  the real hand software.
-- **Fault message format** — the mock's `"<Actuator>: simulated
-  overcurrent"` string is a placeholder; fault-to-actuator matching in
-  the status chips relies on that exact shape via a text match, which
-  should become a structured field once the real format is known.
-- **Outbound parameter writes** — "Apply" in the parameter panel still
-  only updates local state and logs an event. Sending parameters to the
-  real device needs the firmware's command protocol.
-- **Sample rate / timing** — CSV export and saved-test charts use sample
-  index as the x-axis, not real elapsed time, since the real device's
-  sample rate isn't confirmed yet.
 
